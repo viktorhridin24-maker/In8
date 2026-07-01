@@ -65,27 +65,25 @@
    </div>
 
 <script>
+document.addEventListener('DOMContentLoaded', () => {
   const chatInput = document.querySelector('.gochat');
-  const btnOption1 = document.querySelector('.option1');
-  const btnOption2 = document.querySelector('.option2');
-  const btnOption3 = document.querySelector('.option3');
+  
+  // Добавляем проверку, чтобы скрипт не падал, если кнопок нет
+  const setupBtn = (selector, text) => {
+    const btn = document.querySelector(selector);
+    if (btn) {
+      btn.addEventListener('click', () => {
+        chatInput.value = text;
+        chatInput.focus();
+      });
+    }
+  };
 
-  btnOption1.addEventListener('click', () => {
-    chatInput.value = 'Привет, In8! Я интересуюсь матчем ЧМ-2026. Как проходят обстоятельства?';
-    chatInput.focus();
-  });
+  setupBtn('.option1', 'Привет, In8! Я интересуюсь матчем ЧМ-2026. Как проходят обстоятельства?');
+  setupBtn('.option2', 'Привет, In8! Кто, по твоему мнению, победит в текущем этапе ЧМ-2026 и почему?');
+  setupBtn('.option3', 'Привет, подскажи, где можно официально и в хорошем качестве посмотреть трансляцию ЧМ-2026?');
 
-  btnOption2.addEventListener('click', () => {
-    chatInput.value = 'Привет, In8! Кто, по твоему мнению, победит в текущем этапе ЧМ-2026 и почему?';
-    chatInput.focus();
-  });
-
-  btnOption3.addEventListener('click', () => {
-    chatInput.value = 'Привет, подскажи, где можно официально и в хорошем качестве посмотреть трансляцию ЧМ-2026?';
-    chatInput.focus();
-  });
-
-const confirmBtn = document.getElementById('confirmBtn');
+  const confirmBtn = document.getElementById('confirmBtn');
   if (confirmBtn) {
     confirmBtn.addEventListener('click', function() {
       const checkbox = document.getElementById('rulesCheckbox');
@@ -96,6 +94,7 @@ const confirmBtn = document.getElementById('confirmBtn');
       }
     });
   }
+});
 </script>
 </body>
 </html>
