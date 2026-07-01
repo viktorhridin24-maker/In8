@@ -90,6 +90,17 @@
     e.preventDefault(); // чтобы страница не перезагружалась
     document.querySelector('.warning').style.display = 'none';
 });
+
+    document.getElementById('confirmBtn').addEventListener('click', function() {
+    const checkbox = document.getElementById('rulesCheckbox');
+    
+    if (checkbox.checked) {
+        document.querySelector('.warning').style.display = 'none';
+        console.log("Согласие получено!");
+    } else {
+        alert("Поставьте галочку на то, что вы согласны с правилами команды vktr team.");
+    }
+});
 </script>
 </body>
 </html>
