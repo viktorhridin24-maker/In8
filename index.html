@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Infinity8</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="https://raw.githubusercontent.com/viktorhridin24-maker/In8/9e931e14cebe925ef8764f40942886f362945808/In8.png" type="image/x-icon">
+</head>
+<body>
+ <div class="In8historychat">
+    <div class="leftside">
+      <div class="Infinity8logo">
+        <img src="https://raw.githubusercontent.com/viktorhridin24-maker/In8/9e931e14cebe925ef8764f40942886f362945808/In8.png" width="50">
+        <h1>Infinity8</h1>
+      </div>
+      <img src="https://raw.githubusercontent.com/viktorhridin24-maker/In8/c92f9a7abc7135d175939fb8a3db0c972f1989f1/chatin8.png" class="chatnon">
+      <h3>История чата будет сделан позже.</h3>
+    </div>
+
+    <button class="vktrprofile" onclick="window.location.href='https://vktrteam.net/'">
+        <img src="https://github.com/viktorhridin24-maker/vktr/blob/main/vktriduser.png?raw=true" width="50" class="avataricon">
+        <p>Регистрация с vktrID не сделана.</p>
+    </button>
+ </div>
+<div class="theonestchat">
+   <div class="logoinchat">
+    <img src="https://github.com/viktorhridin24-maker/In8/blob/main/In8.png?raw=true" width="50">
+    <span class="chattext">Шоу начинается, не так ли?</span>
+   </div>
+     <div class="event">
+      <img src="https://github.com/viktorhridin24-maker/In8/blob/main/FIFA%202026%20WC.png?raw=true" width="50">
+      <h3>ЧМ-2026 идёт, и вы можете спросить что угодно с этим или не с этим. Попробуйте разные варианты!</h3>
+      <button class="option1">Спросить о матче</button>
+      <button class="option2">Кто по его мнению победит</button>
+      <button class="option3">Где смотреть ЧМ</button>
+     </div>
+    <div class="idontkhow">
+      <button class="textauto">
+      <img src="https://github.com/viktorhridin24-maker/In8/blob/main/pen.png?raw=true" width="20">
+      <p>Писать</p>
+      </button>
+      <button class="learnauto">
+      <img src="https://github.com/viktorhridin24-maker/In8/blob/main/learn.png?raw=true" width="20">
+      <p>Учить</p>
+      </button>
+      <button class="workauto">
+      <img src="https://github.com/viktorhridin24-maker/In8/blob/main/work%20(1).png?raw=true" width="20">
+      <p>Работа</p>
+      </button>
+    </div>
+   <div class="sameschat">
+    <input type="text" class="gochat" placeholder="Чем помочь?">
+    <button class="instruments">
+    ﻿   +  ﻿
+    </button>
+    <select class="model">
+      <option value="claude">Sonnet 4.6 High</option>
+        <option value="sonnet-low">ChatGPT o4-mini</option>
+    </select>
+   </div>
+
+<script>
+  const chatInput = document.querySelector('.gochat');
+  const btnOption1 = document.querySelector('.option1');
+  const btnOption2 = document.querySelector('.option2');
+  const btnOption3 = document.querySelector('.option3');
+
+  btnOption1.addEventListener('click', () => {
+    chatInput.value = 'Привет, In8! Я интересуюсь матчем ЧМ-2026. Как проходят обстоятельства?';
+    chatInput.focus();
+  });
+
+  btnOption2.addEventListener('click', () => {
+    chatInput.value = 'Привет, In8! Кто, по твоему мнению, победит в текущем этапе ЧМ-2026 и почему?';
+    chatInput.focus();
+  });
+
+  btnOption3.addEventListener('click', () => {
+    chatInput.value = 'Привет, подскажи, где можно официально и в хорошем качестве посмотреть трансляцию ЧМ-2026?';
+    chatInput.focus();
+  });
+</script>
+</body>
+</html>
