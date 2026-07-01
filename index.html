@@ -86,11 +86,6 @@
     chatInput.focus();
   });
 
-    document.getElementById('agreementForm').addEventListener('submit', function(e) {
-    e.preventDefault(); // чтобы страница не перезагружалась
-    document.querySelector('.warning').style.display = 'none';
-});
-
     document.getElementById('confirmBtn').addEventListener('click', function() {
     const checkbox = document.getElementById('rulesCheckbox');
     
