@@ -207,3 +207,15 @@ h1, h3, p {
     align-items: center; /* выравнивает по центру по вертикали */
     gap: 10px; /* расстояние между шаром и текстом */  
 }
+
+.warning {
+    background: rgb(218, 55, 55);
+    color: white;
+    border-radius: 20px 0px;
+    padding: 20px;
+    max-width: 600px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
