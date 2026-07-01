@@ -26,12 +26,14 @@
     <img src="https://github.com/viktorhridin24-maker/In8/blob/main/In8.png?raw=true" width="50">
     <span class="chattext">Шоу начинается, не так ли?</span>
    </div>
-    <div class="warning">
+<form id="agreementForm">
+  <div class="warning">
         <h3>Информация</h3>
         <p>
             Смотря проекты в BETA-режиме, вы должны потвердить, что вы соглашаетесь с правилами vktrteam.net.
         </p>
         <input type="checkbox" required>Я соглашаюсь с правилами vktr team и понимаю, что это нельзя отменить
+        <button type="submit">Подтвердить</button>
     </div>
      <div class="event">
       <img src="https://github.com/viktorhridin24-maker/In8/blob/main/FIFA%202026%20WC.png?raw=true" width="50">
@@ -60,8 +62,8 @@
     ﻿   +  ﻿
     </button>
     <select class="model">
-      <option value="claude">Sonnet 4.6 High</option>
-        <option value="sonnet-low">ChatGPT o4-mini</option>
+      <option value="claude">???</option>
+        <option value="sonnet-low">???</option>
     </select>
    </div>
 
@@ -85,6 +87,11 @@
     chatInput.value = 'Привет, подскажи, где можно официально и в хорошем качестве посмотреть трансляцию ЧМ-2026?';
     chatInput.focus();
   });
+
+    document.getElementById('agreementForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // чтобы страница не перезагружалась
+    document.querySelector('.warning').style.display = 'none';
+});
 </script>
 </body>
 </html>
