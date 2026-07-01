@@ -86,16 +86,17 @@
     chatInput.focus();
   });
 
-    document.getElementById('confirmBtn').addEventListener('click', function() {
-    const checkbox = document.getElementById('rulesCheckbox');
-    
-    if (checkbox.checked) {
+const confirmBtn = document.getElementById('confirmBtn');
+  if (confirmBtn) {
+    confirmBtn.addEventListener('click', function() {
+      const checkbox = document.getElementById('rulesCheckbox');
+      if (checkbox && checkbox.checked) {
         document.querySelector('.warning').style.display = 'none';
-        console.log("Согласие получено!");
-    } else {
+      } else {
         alert("Поставьте галочку на то, что вы согласны с правилами команды vktr team.");
-    }
-});
+      }
+    });
+  }
 </script>
 </body>
 </html>
