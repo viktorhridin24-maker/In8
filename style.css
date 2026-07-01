@@ -71,7 +71,7 @@ h1, h3, p {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 20px;
     box-sizing: border-box;
 }
