@@ -66,12 +66,12 @@ h1, h3, p {
 
 /* Главный контейнер чата */
 .theonestchat {
-    margin-left: 180px; /* Твой отступ для сайдбара */
+    margin-left: 180px; /* Отступ под ширину сайдбара */
     padding: 40px;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Было flex-start, меняем на center */
+    align-items: flex-start;
     gap: 20px;
     box-sizing: border-box;
 }
@@ -118,6 +118,7 @@ h1, h3, p {
     position: fixed;
     bottom: 30px;
     left: calc(180px + (100% - 180px) / 2); /* Центрирование в рабочей зоне */
+    border: 1px solid rgba(255, 255, 255, 0.137);
     transform: translateX(-50%);
     width: 100%;
     max-width: 500px;
@@ -126,6 +127,7 @@ h1, h3, p {
     padding: 15px 20px;
     box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.3);
     box-sizing: border-box;
+    backdrop-filter: blur(1.2px);
 }
 
 .sameschat input {
@@ -208,7 +210,6 @@ h1, h3, p {
     gap: 10px; /* расстояние между шаром и текстом */  
 }
 
-/* Предупреждение о BETA версии */
 .warning {
     background: rgb(218, 55, 55);
     color: white;
