@@ -35,9 +35,8 @@ h1, h3, p {
 }
 
 .Infinity8logo {
-    background-color: #696565;
     color: rgb(255, 255, 255);
-    padding: 15px;
+    padding: 0px;
     border: none;
     border-radius: 20px 0 20px 0;
     text-align: center;
