@@ -75,12 +75,14 @@ h1, h3, p {
     box-sizing: border-box;
 }
 
-.logoinchat span {
+.logoinchat {
     color: rgb(255, 255, 255);
     font-size: 30px;
     font-weight: bold;
     display: block; /* Переключаем в блочный режим */
     height: 100%;   /* Заставляем span растянуться на 100% высоты родителя */
+    -webkit-user-drag: none; /* для браузеров Safari и Chrome */
+  user-select: none; /* защита от случайного выделения */
 }
 
 /* Карточка события ЧМ-2026 */
