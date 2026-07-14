@@ -23,8 +23,9 @@
  </div>
 <div class="theonestchat">
    <div class="logoinchat">
-    <img src="https://github.com/viktorhridin24-maker/In8/blob/main/In8.png?raw=true" draggable="false" width="50">
-    <span class="chattext">Шоу начинается, не так ли?</span>
+    <img src="https://github.com/viktorhridin24-maker/In8/blob/main/In8.png?raw=true" width="50">
+    <!-- Сюда JavaScript будет подставлять случайную фразу -->
+    <span class="chattext">Загрузка...</span>
    </div>
 <form id="agreementForm" class="warning">
     <a href="https://vktrteam.net/">
@@ -53,40 +54,94 @@
       <p>Работа</p>
       </button>
     </div>
-   <div class="sameschat">
+
+   <!-- Обернули в form для отправки через Enter -->
+   <form id="chatMessageForm" class="sameschat">
     <input type="text" class="gochat" placeholder="Чем помочь?" required>
-    <button class="instruments">
+    <button type="button" class="instruments">
     ﻿   +  ﻿
     </button>
     <select class="model">
       <option value="claude">???</option>
         <option value="sonnet-low">???</option>
     </select>
-   </div>
+   </form>
+
 <div class="aidisclaimer">
   <a href="https://telegra.ph/O-gallyucinacii-Infinity8-07-03">
   <p>In8 - это ИИ. Он может говорить всякий бред</p>
   </a>
 </div>
+
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const chatInput = document.querySelector('.gochat');
-  
-  // Добавляем проверку, чтобы скрипт не падал, если кнопок нет
+  const buttonsBlock = document.querySelector('.idontkhow');
+  const chatText = document.querySelector('.chattext');
+  const chatForm = document.getElementById('chatMessageForm');
+
+  // ================= СЛУЧАЙНЫЕ ПРИВЕТСТВИЯ =================
+  const greetings = [
+    "Пора пить Живчик и спрашивать что то!",
+    "Смотри, чтобы словарный запас не закончился!",
+    "Внимательно слушаю!",
+    "911, что у вас случилось?",
+    "Я магический шар, мне можно",
+    "Приятно видеть!",
+    "Психолог слушает вас"
+  ];
+
+  // Выбираем случайную фразу и вставляем её в span
+  const randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
+  chatText.textContent = randomGreeting;
+  // ========================================================
+
+  // Проверка состояния поля ввода
+  const toggleButtons = () => {
+    if (chatInput.value.trim() !== '') {
+      buttonsBlock.style.display = 'none';
+    } else {
+      buttonsBlock.style.display = 'flex'; 
+    }
+  };
+
+  // Слушаем ввод текста
+  chatInput.addEventListener('input', toggleButtons);
+
+  // Настройка быстрых кнопок-подсказок (исправлены селекторы)
   const setupBtn = (selector, text) => {
     const btn = document.querySelector(selector);
     if (btn) {
       btn.addEventListener('click', () => {
         chatInput.value = text;
         chatInput.focus();
+        toggleButtons();
       });
     }
   };
 
-  setupBtn('.option1', 'Привет, In8! Я интересуюсь матчем ЧМ-2026. Как проходят обстоятельства?');
-  setupBtn('.option2', 'Привет, In8! Кто, по твоему мнению, победит в текущем этапе ЧМ-2026 и почему?');
-  setupBtn('.option3', 'Привет, подскажи, где можно официально и в хорошем качестве посмотреть трансляцию ЧМ-2026?');
+  setupBtn('.textauto', 'Привет, In8! Помоги мне написать текст.');
+  setupBtn('.learnauto', 'Привет, In8! Чему новому ты можешь меня научить?');
+  setupBtn('.workauto', 'Привет, In8! Давай поработаем над проектом.');
 
+  // Логика отправки формы
+  if (chatForm) {
+    chatForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const userMessage = chatInput.value.trim();
+      if (!userMessage) return;
+
+      chatText.textContent = "Infinity8 думает...";
+
+      setTimeout(() => {
+        chatText.textContent = "Вы спросили: '" + userMessage + "'. Подключение к серверу ИИ настраивается.";
+        chatInput.value = '';
+        toggleButtons();
+      }, 1500);
+    });
+  }
+
+  // Подтверждение правил vktr team
   const confirmBtn = document.getElementById('confirmBtn');
   if (confirmBtn) {
     confirmBtn.addEventListener('click', function() {
