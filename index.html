@@ -24,8 +24,7 @@
 <div class="theonestchat">
    <div class="logoinchat">
     <img src="https://github.com/viktorhridin24-maker/In8/blob/main/In8.png?raw=true" width="50">
-    <!-- Сюда JavaScript будет подставлять случайную фразу -->
-    <span class="chattext">Загрузка...</span>
+    <span class="chattext">Что бы мне сказать...</span>
    </div>
 <form id="agreementForm" class="warning">
     <a href="https://vktrteam.net/">
@@ -55,18 +54,18 @@
       </button>
     </div>
 
-   <!-- Обернули в form для отправки через Enter -->
-   <form id="chatMessageForm" class="sameschat">
+<div class="sameschat">
     <input type="text" class="gochat" placeholder="Чем помочь?" required>
+    <div class="sameschatbuttons">
     <button type="button" class="instruments">
     ﻿   +  ﻿
     </button>
-    <select class="model">
+    <select class="model" disabled>
       <option value="claude">???</option>
         <option value="sonnet-low">???</option>
     </select>
-   </form>
-
+</div>
+</div>
 <div class="aidisclaimer">
   <a href="https://telegra.ph/O-gallyucinacii-Infinity8-07-03">
   <p>In8 - это ИИ. Он может говорить всякий бред</p>
@@ -82,13 +81,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ================= СЛУЧАЙНЫЕ ПРИВЕТСТВИЯ =================
   const greetings = [
-    "Пора пить Живчик и спрашивать что то!",
-    "Смотри, чтобы словарный запас не закончился!",
+    "Привет",
+    "Что то надо?",
     "Внимательно слушаю!",
-    "911, что у вас случилось?",
-    "Я магический шар, мне можно",
-    "Приятно видеть!",
-    "Психолог слушает вас"
+    "Лучшее время, чтобы задавать вопросы",
+    "Время идёт незаметно, если общатся",
+    "Рад уделить время",
+    "Удиви меня вопросами."
   ];
 
   // Выбираем случайную фразу и вставляем её в span
@@ -123,23 +122,6 @@ document.addEventListener('DOMContentLoaded', () => {
   setupBtn('.textauto', 'Привет, In8! Помоги мне написать текст.');
   setupBtn('.learnauto', 'Привет, In8! Чему новому ты можешь меня научить?');
   setupBtn('.workauto', 'Привет, In8! Давай поработаем над проектом.');
-
-  // Логика отправки формы
-  if (chatForm) {
-    chatForm.addEventListener('submit', (event) => {
-      event.preventDefault();
-      const userMessage = chatInput.value.trim();
-      if (!userMessage) return;
-
-      chatText.textContent = "Infinity8 думает...";
-
-      setTimeout(() => {
-        chatText.textContent = "Вы спросили: '" + userMessage + "'. Подключение к серверу ИИ настраивается.";
-        chatInput.value = '';
-        toggleButtons();
-      }, 1500);
-    });
-  }
 
   // Подтверждение правил vktr team
   const confirmBtn = document.getElementById('confirmBtn');
