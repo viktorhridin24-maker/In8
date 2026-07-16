@@ -11,7 +11,7 @@ h1, h3, p {
 
 /* Сайдбар слева */
 .In8historychat {
-    background-color: #413c3c;
+    background-color: #3d3636;
     color: rgb(255, 255, 255);
     padding: 10px;
     border: none;
@@ -52,7 +52,7 @@ h1, h3, p {
     color: rgb(255, 255, 255);
     padding: 15px;
     border: none;
-    border-radius: 20px 0 20px 0;
+    border-radius: 10px 0 20px 0;
     cursor: pointer;
 }
 
@@ -128,7 +128,7 @@ h1, h3, p {
     padding: 15px 20px;
     box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.3);
     box-sizing: border-box;
-    backdrop-filter: blur(1.2px);
+    backdrop-filter: blur(2px);
 }
 
 .sameschat input {
@@ -227,7 +227,7 @@ h1, h3, p {
 .beta {
     background: rgba(0, 0, 0, 0.243);
     color: white;
-    border-radius: 10px 0px;
+    border-radius: 10px 0px 0px 10px;
     padding: 10px;
     max-width: 600px;
     margin-bottom: 20px;
