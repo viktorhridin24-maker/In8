@@ -4,7 +4,7 @@
     <title>Infinity8 - Чат</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="https://raw.githubusercontent.com/viktorhridin24-maker/In8/9e931e14cebe925ef8764f40942886f362945808/In8.png" type="image/x-icon">
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
 </head>
 <body>
  <div class="In8historychat">
@@ -79,23 +79,24 @@
         })
       });
 
-      const data = await response.json();
+const data = await response.json();
       console.log("Ответ от сервера:", data);
 
       if (response.ok && data.choices && data.choices.length > 0) {
         const aiReply = data.choices[0].message.content;
         
-        // Рендерим Markdown в красивый HTML через marked.js
-        aiMessageDiv.innerHTML = marked.parse(aiReply);
+        // Создаем конвертер и рендерим Markdown через Showdown
+        const converter = new showdown.Converter();
+        aiMessageDiv.innerHTML = converter.makeHtml(aiReply);
         
       } else {
         aiMessageDiv.innerHTML = `<p style="color: #ff6b6b;">Ошибка API: ${escapeHtml(data.error?.message || JSON.stringify(data))}</p>`;
       }
-    } catch (err) {
+    } catch (err) { // <-- Вот здесь теперь закрыт try и корректно начался catch
       console.error("Ошибка сети:", err);
       aiMessageDiv.innerHTML = `<p style="color: #ff6b6b;">Сетевая ошибка соединения.</p>`;
     }
-  }
+  } // <-- Закрытие самой функции sendUserMessage
 
   // Обработка нажатия Enter прямо в чате
   chatInput.addEventListener('keydown', async (event) => {
