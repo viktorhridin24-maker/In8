@@ -4,6 +4,7 @@
     <title>Infinity8 - Чат</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="https://raw.githubusercontent.com/viktorhridin24-maker/In8/9e931e14cebe925ef8764f40942886f362945808/In8.png" type="image/x-icon">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.js"></script>
 </head>
 <body>
  <div class="In8historychat">
@@ -115,6 +116,19 @@
     return text.replace(/[&<>"']/g, m => map[m]);
   }
 });
+  let formattedReply = escapeHtml(aiReply)
+  .replace(/^### (.*$)/gm, '<h3>$1</h3>') // Заменяет ### заголовок
+  .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Заменяет **текст** на жирный
+  .replace(/\n/g, '<br>'); // Переносы строк
+if (response.ok && data.choices && data.choices.length > 0) {
+        const aiReply = data.choices[0].message.content;
+        
+        // Используем marked.js для красивого превращения Markdown в HTML
+        aiMessageDiv.innerHTML = marked.parse(aiReply);
+        
+      } else {
+        aiMessageDiv.innerHTML = `<p style="color: #ff6b6b;">Ошибка API: ${escapeHtml(data.error?.message || JSON.stringify(data))}</p>`;
+      }
 </script>
 </body>
 </html>
