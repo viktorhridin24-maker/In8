@@ -134,6 +134,19 @@ document.addEventListener('DOMContentLoaded', () => {
         alert("Поставьте галочку на то, что вы согласны с правилами команды vktr team.");
       }
     });
+   // ================= ПЕРЕХОД В ЧАТ ПО ENTER =================
+  chatInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      const text = chatInput.value.trim();
+      if (text !== '') {
+        // Сохраняем текст в локальное хранилище
+        localStorage.setItem('pending_message', text);
+        // Перенаправляем на страницу чата
+        window.location.href = 'chat.html';
+      }
+    }
+  });
+  // ========================================================
   }
 });
 </script>
