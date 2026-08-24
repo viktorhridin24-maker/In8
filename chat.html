@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Infinity8</title>
+    <title>Infinity8 - Чат</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="https://raw.githubusercontent.com/viktorhridin24-maker/In8/9e931e14cebe925ef8764f40942886f362945808/In8.png" type="image/x-icon">
 </head>
@@ -26,7 +26,7 @@
     <input type="text" class="gochat" id="chatInput" placeholder="Чем помочь?" required>
     <div class="sameschatbuttons">
     <button type="button" class="instruments">
-    ﻿   +  ﻿
+    + 
     </button>
     <select class="model" disabled>
       <option value="claude">???</option>
@@ -52,54 +52,63 @@
 
   console.log("Скрипт чата успешно запущен, поле ввода найдено!");
 
+  // Функция отправки сообщения в бэкенд Мистраля
+  async function sendUserMessage(userText) {
+    if (!userText || userText.trim() === '') return;
+
+    // 1. Создаем блок с сообщением пользователя
+    const userMessageDiv = document.createElement('div');
+    userMessageDiv.className = 'usermessage';
+    userMessageDiv.innerHTML = `<p>${escapeHtml(userText)}</p>`;
+    chatContainer.appendChild(userMessageDiv);
+
+    // 2. Создаем блок для ответа ИИ (с текстом загрузки)
+    const aiMessageDiv = document.createElement('div');
+    aiMessageDiv.className = 'ansverin8';
+    aiMessageDiv.innerHTML = `<p>Думаю над ответом...</p>`;
+    chatContainer.appendChild(aiMessageDiv);
+
+    try {
+      // 3. Запрос к бэкенду на Vercel
+      const response = await fetch('https://in8proxymistral.vercel.app/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          messages: [{ role: 'user', content: userText }]
+        })
+      });
+
+      const data = await response.json();
+      console.log("Ответ от сервера:", data);
+
+      if (response.ok && data.choices && data.choices.length > 0) {
+        const aiReply = data.choices[0].message.content;
+        aiMessageDiv.innerHTML = `<p>${escapeHtml(aiReply).replace(/\n/g, '<br>')}</p>`;
+      } else {
+        aiMessageDiv.innerHTML = `<p style="color: #ff6b6b;">Ошибка API: ${escapeHtml(data.error?.message || JSON.stringify(data))}</p>`;
+      }
+    } catch (err) {
+      console.error("Ошибка сети:", err);
+      aiMessageDiv.innerHTML = `<p style="color: #ff6b6b;">Сетевая ошибка соединения.</p>`;
+    }
+  }
+
+  // Обработка нажатия Enter прямо в чате
   chatInput.addEventListener('keydown', async (event) => {
     if (event.key === 'Enter') {
-      const userText = chatInput.value.trim();
-      console.log("Нажали Enter, текст:", userText);
-
-      if (userText === '') return;
-
+      const text = chatInput.value.trim();
       chatInput.value = ''; // Очищаем поле ввода
-
-      const sameschatBlock = document.querySelector('.sameschat');
-
-      // 1. Создаем блок с сообщением пользователя
-      const userMessageDiv = document.createElement('div');
-      userMessageDiv.className = 'usermessage';
-      userMessageDiv.innerHTML = `<p>${escapeHtml(userText)}</p>`;
-      chatContainer.appendChild(userMessageDiv); // Вместо insertBefore
-
-      // 2. Создаем блок для ответа ИИ (с текстом загрузки)
-      const aiMessageDiv = document.createElement('div');
-      aiMessageDiv.className = 'ansverin8';
-      aiMessageDiv.innerHTML = `<p>Думаю над ответом...</p>`;
-      chatContainer.appendChild(aiMessageDiv); // Вместо insertBefore
-
-try {
-        // 3. Запрос к нашему бэкенду на Vercel в правильном формате
-        const response = await fetch('https://in8proxymistral.vercel.app/api/chat', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            messages: [{ role: 'user', content: userText }]
-          })
-        });
-
-        const data = await response.json();
-        console.log("Ответ от сервера:", data);
-
-        if (response.ok && data.choices && data.choices.length > 0) {
-          const aiReply = data.choices[0].message.content;
-          aiMessageDiv.innerHTML = `<p>${escapeHtml(aiReply).replace(/\n/g, '<br>')}</p>`;
-        } else {
-          aiMessageDiv.innerHTML = `<p style="color: #ff6b6b;">Ошибка API: ${escapeHtml(data.error?.message || JSON.stringify(data))}</p>`;
-        }
-      } catch (err) {
-        console.error("Ошибка сети:", err);
-        aiMessageDiv.innerHTML = `<p style="color: #ff6b6b;">Сетевая ошибка соединения.</p>`;
-      }
+      await sendUserMessage(text);
     }
   });
+
+  // АВТОМАТИЧЕСКИЙ ПЕРЕХОД С ГЛАВНОЙ СТРАНИЦЫ:
+  // Проверяем, есть ли сохраненный текст от index.html
+  const pendingMessage = localStorage.getItem('pending_message');
+  if (pendingMessage) {
+    localStorage.removeItem('pending_message'); // Сразу удаляем, чтобы не дублировалось
+    sendUserMessage(pendingMessage); // Сразу отправляем Мистралю
+  }
 
   function escapeHtml(text) {
     const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
