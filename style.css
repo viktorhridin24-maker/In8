@@ -236,3 +236,17 @@ h1, h3, p {
     gap: 15px;
     align-items: center; /* выравнивает по центру по вертикали */
 }
+
+.usermessage {
+    background: rgba(0, 0, 0, 0.243);
+   border-radius: 10px 10px 0px 10px; 
+   width: 400px;
+   height: auto;
+}
+
+.ansverin8 {
+    background: rgba(138, 168, 159, 0.24);
+   border-radius: 0px 10px 10px 10px; 
+   width: 400px;
+   height: auto;
+}
